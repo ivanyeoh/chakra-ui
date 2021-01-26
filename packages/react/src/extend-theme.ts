@@ -32,8 +32,13 @@ export function extendTheme<T extends ThemeOverride>(
   overrides: T,
   baseTheme: any = defaultTheme,
 ) {
-  function customizer(source: unknown, override: unknown) {
-    if (isFunction(source)) {
+  function customizer(
+    source: unknown,
+    override: unknown,
+    key: string,
+    object: any,
+  ) {
+    if (isFunction(source) && object.hasOwnProperty(key)) {
       return (...args: unknown[]) => {
         const sourceValue = source(...args)
 
